@@ -161,6 +161,10 @@ class BinOp:
             return f"({op1_str} // {op2_str})"
     
 
+class Bool:
+    def __init__(self, operator, 
+                 
+                 
 if __name__ == "__main__":
 
     # Sample expression tree for (2 + (3 * 5))
