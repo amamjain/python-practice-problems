@@ -12,7 +12,7 @@ def min_depth_leaf(tree):
     if tree.children == []:
         return 0
     else:
-        return 1 + min(min_depth_leaf(child) for child in tree.children)
+        return 1 + min([min_depth_leaf(child) for child in tree.children])
     
     
 
