@@ -161,8 +161,45 @@ class BinOp:
             return f"({op1_str} // {op2_str})"
     
 
-class Bool:
-    def __init__(self, operator, 
+class BinaryBoolNode:
+    def __init__(self, val, children):
+        self.children = children
+        self.val = val
+        assert (isinstance(val, bool) and children is None) or (val == "and" or "or" and isinstance(children, list) and len(children) >= 2) or (val == "not" and isinstance(children, list) and len(children) == 1)                                            
+
+    def is_const(self):
+        return False
+    
+    def num_nodes(self):
+        if self.val == "and" or "or":
+            return 1 + len(self.children)
+        else:
+            return 1
+  
+    def eval(self):
+        if self.val == "and":
+            for child in self.children:
+                if not child.eval():
+                    return False
+            return True
+        if self.val == "or":
+            for child in self.children:
+                if child.eval():
+                    return True
+            return False
+        if self.val == "not":
+            if self.children[0].eval():
+                return False
+            else:
+                return True
+        else:
+            return self.val
+            
+    def __str__(self):
+        '''
+        ????????
+        '''
+        pass
                  
                  
 if __name__ == "__main__":
